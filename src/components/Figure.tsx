@@ -6,6 +6,7 @@ import {
   poseAtCycle,
   poseView,
   resolveHead,
+  spineControl,
   type Point,
   type Pose,
 } from '../lib/pose'
@@ -40,9 +41,17 @@ type Props = {
   singleLeg?: boolean
 }
 
-type Segment = { pts: Point[]; w: number }
+type Segment = { d: string; w: number }
 
-const path = (pts: Point[]) => pts.map((pt) => `${pt[0]},${pt[1]}`).join(' ')
+/** Un membre : des segments droits articulés, adoucis par les jointures rondes. */
+const limb = (pts: Point[]) =>
+  pts.map((pt, i) => `${i ? 'L' : 'M'} ${pt[0]} ${pt[1]}`).join(' ')
+
+/** La colonne : une courbe, jamais un bâton. */
+const spine = (pose: Pose) => {
+  const [cx, cy] = spineControl(pose)
+  return `M ${pose.neck[0]} ${pose.neck[1]} Q ${cx} ${cy} ${pose.hip[0]} ${pose.hip[1]}`
+}
 
 /**
  * Un groupe de membres, tracé deux fois : d'abord épais dans la couleur du
@@ -56,12 +65,12 @@ function Part({ segments, outline }: { segments: Segment[]; outline: number }) {
     <g>
       <g className="stroke-outline">
         {segments.map((s, i) => (
-          <polyline key={i} points={path(s.pts)} strokeWidth={s.w + outline * 2} />
+          <path key={i} d={s.d} strokeWidth={s.w + outline * 2} />
         ))}
       </g>
       <g className="stroke-body">
         {segments.map((s, i) => (
-          <polyline key={i} points={path(s.pts)} strokeWidth={s.w} />
+          <path key={i} d={s.d} strokeWidth={s.w} />
         ))}
       </g>
     </g>
@@ -139,15 +148,19 @@ export function Figure({
   // Les membres du fond forment un groupe à part, dessiné en premier : le
   // contour du corps passe devant eux, donc on voit quel bras et quelle jambe
   // sont au premier plan.
-  const nearArm: Segment = { pts: [pose.neck, pose.elbowA, pose.handA], w: BODY.arm }
+  const nearArm: Segment = { d: limb([pose.neck, pose.elbowA, pose.handA]), w: BODY.arm }
   const behind: Segment[] = [
-    ...(singleArm ? [] : [{ pts: [pose.neck, pose.elbowB, pose.handB], w: BODY.arm * BODY.far }]),
-    ...(singleLeg ? [] : [{ pts: [pose.hip, pose.kneeB, pose.footB], w: BODY.leg * BODY.far }]),
+    ...(singleArm
+      ? []
+      : [{ d: limb([pose.neck, pose.elbowB, pose.handB]), w: BODY.arm * BODY.far }]),
+    ...(singleLeg
+      ? []
+      : [{ d: limb([pose.hip, pose.kneeB, pose.footB]), w: BODY.leg * BODY.far }]),
     ...(armsBehind ? [nearArm] : []),
   ]
   const front: Segment[] = [
-    { pts: [pose.neck, pose.hip], w: BODY.torso },
-    { pts: [pose.hip, pose.kneeA, pose.footA], w: BODY.leg },
+    { d: spine(pose), w: BODY.torso },
+    { d: limb([pose.hip, pose.kneeA, pose.footA]), w: BODY.leg },
     ...(armsBehind ? [] : [nearArm]),
   ]
 

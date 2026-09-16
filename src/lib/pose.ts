@@ -26,6 +26,20 @@ export type Pose = {
   footA: Point
   kneeB: Point
   footB: Point
+  /**
+   * Courbure du dos, en unités : de combien la colonne s'écarte de la droite
+   * épaules–bassin, à mi-hauteur. Sans elle le tronc est un bâton et un dos
+   * rond ne peut pas exister.
+   *
+   * Le sens est donné par la perpendiculaire à l'axe épaules → bassin, tournée
+   * d'un quart de tour dans le sens horaire à l'écran. Concrètement : de profil
+   * tête à gauche, une valeur négative bombe le dos vers le haut (dos rond) ;
+   * de face, une valeur positive bombe la colonne vers la gauche, donc le buste
+   * s'incline à droite.
+   *
+   * Elle s'interpole comme le reste : le dos s'arrondit au fil du mouvement.
+   */
+  bend?: number
 }
 
 export const GROUND_Y = 125
@@ -73,6 +87,29 @@ export const OUTLINE_PX = 3
 export const MIN_VIEW = { w: 125, h: 100 } as const
 
 /**
+ * Point de contrôle de la colonne.
+ *
+ * La colonne est tracée en Bézier quadratique entre les épaules et le bassin.
+ * Le point de contrôle est placé à deux fois l'écart voulu, parce qu'une
+ * quadratique ne passe qu'à mi-chemin de son point de contrôle : `bend` est
+ * ainsi l'écart réellement visible au milieu du dos.
+ */
+export function spineControl(pose: Pose): Point {
+  const [nx, ny] = pose.neck
+  const [hx, hy] = pose.hip
+  const mid: Point = [(nx + hx) / 2, (ny + hy) / 2]
+  const bend = pose.bend ?? 0
+  if (!bend) return mid
+  const dx = hx - nx
+  const dy = hy - ny
+  const len = Math.hypot(dx, dy) || 1
+  // Perpendiculaire à l'axe du tronc, quart de tour horaire à l'écran.
+  const px = -dy / len
+  const py = dx / len
+  return [mid[0] + px * bend * 2, mid[1] + py * bend * 2]
+}
+
+/**
  * Position réelle de la tête.
  *
  * Les poses donnent une tête approximative : on garde sa DIRECTION (c'est elle
@@ -104,7 +141,9 @@ export function lerpPose(a: Pose, b: Pose, t: number): Pose {
     const [bx, by] = b[j]
     out[j] = [ax + (bx - ax) * t, ay + (by - ay) * t]
   }
-  return out as Pose
+  const from = a.bend ?? 0
+  const to = b.bend ?? 0
+  return { ...(out as Pose), bend: from + (to - from) * t }
 }
 
 /** Accélération/décélération douce : un mouvement de mobilité n'est jamais linéaire. */
@@ -152,15 +191,21 @@ export function poseView(frames: Pose[], withGround = true, pad = 6): View {
     if (joint.startsWith('knee') || joint.startsWith('foot')) return BODY.leg / 2 + BODY.outline
     return BODY.arm / 2 + BODY.outline
   }
+  const swallow = (x: number, y: number, r: number) => {
+    minX = Math.min(minX, x - r)
+    minY = Math.min(minY, y - r)
+    maxX = Math.max(maxX, x + r)
+    maxY = Math.max(maxY, y + r)
+  }
   for (const f of frames) {
     for (const j of JOINTS) {
       const [x, y] = j === 'head' ? resolveHead(f) : f[j]
-      const r = reach(j)
-      minX = Math.min(minX, x - r)
-      minY = Math.min(minY, y - r)
-      maxX = Math.max(maxX, x + r)
-      maxY = Math.max(maxY, y + r)
+      swallow(x, y, reach(j))
     }
+    // Une colonne courbée déborde de ses articulations : la Bézier reste dans
+    // l'enveloppe de ses trois points, donc englober le point de contrôle suffit.
+    const [cx, cy] = spineControl(f)
+    swallow(cx, cy, BODY.torso / 2 + BODY.outline)
   }
   // Le sol ne fait partie du cadre que si le corps le touche vraiment.
   const ground = withGround && maxY >= GROUND_Y - 4

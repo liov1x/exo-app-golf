@@ -57,6 +57,7 @@ export const EXERCISES: Exercise[] = [
     singleLeg: true,
     frames: [
       {
+        bend: -2,
         head: [46, 116], neck: [58, 119], hip: [98, 119],
         elbowA: [74, 124], handA: [90, 124],
         elbowB: [72, 127], handB: [88, 128],
@@ -64,6 +65,7 @@ export const EXERCISES: Exercise[] = [
         kneeB: [110, 101], footB: [126, 125],
       },
       {
+        bend: -6,
         head: [46, 116], neck: [58, 119], hip: [98, 92],
         elbowA: [74, 124], handA: [90, 124],
         elbowB: [72, 127], handB: [88, 128],
@@ -89,6 +91,7 @@ export const EXERCISES: Exercise[] = [
     // et le bras vient refermer le tout en pâté.
     frames: [
       {
+        bend: -3,
         head: [44, 118], neck: [56, 118], hip: [106, 118],
         elbowA: [66, 106], handA: [78, 98],
         elbowB: [66, 108], handB: [78, 100],
@@ -96,6 +99,7 @@ export const EXERCISES: Exercise[] = [
         kneeB: [88, 94], footB: [106, 112],
       },
       {
+        bend: -8,
         head: [44, 118], neck: [56, 118], hip: [102, 118],
         elbowA: [60, 100], handA: [70, 90],
         elbowB: [60, 102], handB: [70, 92],
@@ -119,6 +123,7 @@ export const EXERCISES: Exercise[] = [
     singleLeg: true,
     frames: [
       {
+        bend: 2,
         head: [58, 80], neck: [70, 84], hip: [118, 84],
         elbowA: [70, 104], handA: [72, 124],
         elbowB: [67, 105], handB: [69, 126],
@@ -126,7 +131,8 @@ export const EXERCISES: Exercise[] = [
         kneeB: [115, 123], footB: [133, 126],
       },
       {
-        head: [50, 90], neck: [64, 90], hip: [106, 94],
+        bend: -12,
+        head: [52, 100], neck: [64, 90], hip: [106, 94],
         elbowA: [70, 106], handA: [72, 124],
         elbowB: [67, 107], handB: [69, 126],
         kneeA: [118, 122], footA: [136, 125],
@@ -146,6 +152,7 @@ export const EXERCISES: Exercise[] = [
     singleArm: true,
     frames: [
       {
+        bend: -1,
         head: [54, 78], neck: [66, 82], hip: [108, 102],
         elbowA: [68, 104], handA: [70, 124],
         elbowB: [65, 105], handB: [67, 126],
@@ -153,6 +160,7 @@ export const EXERCISES: Exercise[] = [
         kneeB: [128, 114], footB: [148, 125],
       },
       {
+        bend: -1,
         head: [54, 78], neck: [66, 82], hip: [108, 102],
         elbowA: [68, 104], handA: [70, 124],
         elbowB: [65, 105], handB: [67, 126],
@@ -172,6 +180,7 @@ export const EXERCISES: Exercise[] = [
     photo: 'photos/exo-19.jpg',
     frames: [
       {
+        bend: 2,
         head: [94, 26], neck: [96, 40], hip: [98, 74],
         elbowA: [104, 58], handA: [108, 74],
         elbowB: [90, 58], handB: [86, 74],
@@ -179,6 +188,7 @@ export const EXERCISES: Exercise[] = [
         kneeB: [80, 100], footB: [64, 124],
       },
       {
+        bend: 6,
         head: [92, 24], neck: [94, 38], hip: [98, 72],
         elbowA: [98, 16], handA: [100, 3],
         elbowB: [90, 56], handB: [86, 72],
@@ -198,6 +208,7 @@ export const EXERCISES: Exercise[] = [
     photo: 'photos/exo-24.jpg',
     frames: [
       {
+        bend: -9,
         head: [87, 32], neck: [93, 44], hip: [100, 76],
         elbowA: [112, 30], handA: [110, 8],
         elbowB: [76, 38], handB: [68, 20],
@@ -212,6 +223,7 @@ export const EXERCISES: Exercise[] = [
         kneeB: [88, 100], footB: [82, 124],
       },
       {
+        bend: 9,
         head: [113, 32], neck: [107, 44], hip: [100, 76],
         elbowA: [124, 38], handA: [132, 20],
         elbowB: [88, 30], handB: [90, 8],

@@ -228,17 +228,17 @@ button {
   --figure-paper: var(--bg);
 }
 
-.figure polyline {
+.figure path {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.figure .stroke-outline polyline {
+.figure .stroke-outline path {
   stroke: var(--text);
 }
 
-.figure .stroke-body polyline {
+.figure .stroke-body path {
   stroke: var(--figure-paper);
 }
 

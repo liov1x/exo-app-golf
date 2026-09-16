@@ -57,6 +57,31 @@ que la silhouette.
 La couleur du fond est lue dans `--figure-paper` : elle doit correspondre au
 fond réel derrière la figure, sinon l'intérieur du personnage jure.
 
+### La colonne est une courbe
+
+Le tronc n'est pas un segment épaules–bassin mais une Bézier. Chaque pose porte
+un `bend` : de combien la colonne s'écarte de la droite épaules–bassin, au
+milieu du dos. Il s'interpole comme les articulations, donc **le dos s'arrondit
+au fil du mouvement** au lieu de basculer d'un bloc.
+
+Le sens est donné par la perpendiculaire à l'axe épaules → bassin, tournée d'un
+quart de tour horaire à l'écran. De profil tête à gauche, une valeur négative
+bombe le dos vers le haut — c'est le dos rond ; de face, une valeur positive
+incline le buste à droite.
+
+Sans `bend`, tous les personnages étaient des bâtons articulés. Trois exemples
+de ce que la courbure apporte :
+
+| Exercice | Ce que dit la colonne |
+| --- | --- |
+| Bascule à quatre pattes | dos plat à l'aplomb des mains, franchement rond une fois reculé |
+| Inclinaison debout | une colonne qui s'incline, et non un buste qui bascule d'une pièce |
+| Planche | volontairement droite : c'est la consigne de l'exercice |
+
+Quand le dos s'arrondit, la tête suit : son orientation se règle pose par pose
+(menton rentré sur un dos rond). Une tête restée dans l'axe trahit aussitôt
+une colonne qu'on aurait oublié de courber.
+
 ### Une seule graisse de trait
 
 L'épaisseur du contour est fixée en **pixels** (`OUTLINE_PX`), pas en unités du
