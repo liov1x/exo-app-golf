@@ -19,7 +19,18 @@ premier jet : ils se lisent, mais ils n'ont pas été relus un par un.
 Les **29 photos** sont en revanche déjà découpées depuis le PDF d'origine
 (`public/photos/exo-01.jpg` … `exo-29.jpg`).
 
-## Lancer
+## En ligne
+
+L'application est publiée sur GitHub Pages à chaque push :
+**https://liov1x.github.io/exo-app-golf/**
+
+Sur téléphone, « Ajouter à l'écran d'accueil » l'installe : elle s'ouvre alors
+en plein écran et démarre sans réseau.
+
+Le déploiement demande un réglage unique côté GitHub, dans
+Settings → Pages → Build and deployment → Source : **GitHub Actions**.
+
+## Lancer en local
 
 ```sh
 npm install
@@ -166,4 +177,3 @@ et le prochain exercice est annoncé à voix haute pendant la transition.
   reste confus en position basse
 - Éditeur de séances : composer, régler les durées, réordonner
 - Historique local des séances
-- Publication sur GitHub Pages
