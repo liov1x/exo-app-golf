@@ -10,10 +10,10 @@ Régénérer les planches images : `python3 tools/fiche-validation.py`
 | # | Nom | Consigne | Position | Durée | Statut |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Pont fessier | Pieds ancrés, monte le bassin, redescends vertèbre par vertèbre. | Au sol | 45 s | à valider |
-| 2 | Bascule du bassin, dos au sol | Genoux pliés, pieds au sol : bascule le bassin sans décoller les épaules. | Au sol | 40 s | question pour toi |
+| 2 | Bascule du bassin, sans monter | Genoux pliés, pieds au sol : bascule le bassin d'avant en arrière, sans le décoller. | Au sol | 40 s | validé |
 | 3 | Étirement ischio-jambiers | Une jambe tendue vers le haut, tenue à la main, l'autre à plat. | Au sol | 30 s · G/D | à valider |
 | 4 | Bassin enroulé, genoux aux épaules | Enroule le bassin vers le haut, amène les genoux au niveau des épaules. | Au sol | 40 s | validé |
-| 5 | Rotation lombaire, jambe par-dessus | Bras en croix : passe une jambe par-dessus le corps vers le côté opposé. | Au sol | 30 s · G/D | à valider |
+| 5 | Rotation du corps entier | Bras en croix : emmène d'abord les genoux d'un côté, puis laisse le bras opposé passer par-dessus. | Au sol | 30 s · G/D | validé |
 | 6 | Genoux basculés, bras en croix | Genoux pliés : bascule les deux genoux ensemble à droite, puis à gauche. | Au sol | 40 s · G/D | question pour toi |
 | 7 | Genoux basculés, bras en chandelier | Genoux pliés serrés : bascule les deux genoux ensemble à droite, puis à gauche. Coudes pliés au sol. | Au sol | 40 s · G/D | validé |
 | 8 | Papillon allongé | Plantes de pieds l'une contre l'autre : ouvre et referme les genoux. | Au sol | 40 s | à valider |
@@ -40,14 +40,14 @@ Régénérer les planches images : `python3 tools/fiche-validation.py`
 
 ## Questions en attente
 
-- **2** — Très proche du 1. Est-ce un pont fessier plus bas, ou une simple bascule du bassin sans monter ?
 - **6** — Décrit maintenant exactement le même mouvement que le 7. Seuls les bras changent (en croix ici, en chandelier au 7) — ou le 6 est-il autre chose ?
 - **16** — Pendant l'étirement de cheville, la jambe part-elle sur le côté comme le montre la photo, ou reste-t-elle sous le bassin ?
 - **29** — Est-ce la même ouverture d'épaule que le 27, ou un mouvement distinct des paumes ?
 
 ## Notes de dessin
 
-- **5** — rotation — vue de trois quarts
+- **2** — à distinguer du 1, où le bassin monte : ici il ne décolle pas. Tout le mouvement est dans la courbure du bas du dos — bassin et épaules fixes, seule la colonne change
+- **5** — rotation en trois temps — vue de trois quarts : départ à plat, genoux basculés, puis le bras qui suit
 - **6** — rotation — vue de trois quarts
 - **7** — rotation — vue de trois quarts
 - **9** — vue de dessus ou de trois quarts — de profil, le genou qui remonte sur le côté ne se voit pas
