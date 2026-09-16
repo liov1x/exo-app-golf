@@ -1,0 +1,602 @@
+:root {
+  --bg: #0e1116;
+  --panel: #161b23;
+  --line: #262e3a;
+  --text: #eef2f7;
+  --muted: #8d99a9;
+  --work: #e8613c;
+  --rest: #3d8bd4;
+  --accent: var(--work);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Accueil ---------- */
+
+.home {
+  padding: max(24px, env(safe-area-inset-top)) 20px 40px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.home-head h1 {
+  margin: 8px 0 4px;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+}
+
+.home-head p {
+  margin: 0 0 28px;
+  color: var(--muted);
+}
+
+.session-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: grid;
+  gap: 12px;
+}
+
+.session-card {
+  width: 100%;
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  padding: 18px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.session-card:active {
+  transform: scale(0.99);
+}
+
+.session-name {
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.session-sub {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.session-meta {
+  margin-top: 6px;
+  color: var(--work);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.catalogue h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.catalogue ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.catalogue li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.catalogue .num {
+  width: 30px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+
+.catalogue .cat-name {
+  flex: 1;
+}
+
+.catalogue .cat-tag {
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- Séance ---------- */
+
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: max(10px, env(safe-area-inset-top)) 16px max(14px, env(safe-area-inset-bottom));
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.session.is-work {
+  --accent: var(--work);
+}
+
+.session.is-transition {
+  --accent: var(--rest);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.3;
+}
+
+.session-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.remaining-total {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ghost {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 20px;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.ghost.on {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Le schéma occupe l'espace disponible : c'est lui qu'on regarde. */
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.figure {
+  width: 100%;
+  height: 100%;
+  max-height: 40vh;
+}
+
+.figure .ground {
+  stroke: var(--line);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.figure .limb {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.figure .limb polyline {
+  fill: none;
+  stroke: inherit;
+  stroke-width: inherit;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.figure .far {
+  stroke: #56627a;
+  stroke-width: 4;
+}
+
+.figure .spine {
+  stroke: var(--accent);
+  stroke-width: 7;
+}
+
+.figure .head {
+  fill: var(--text);
+}
+
+.next-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+}
+
+.next-label {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rest);
+}
+
+.photo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 46%;
+  max-height: 30%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.info {
+  text-align: center;
+  padding: 4px 0 10px;
+}
+
+.exo-name {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.exo-num {
+  font-size: 13px;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-variant-numeric: tabular-nums;
+}
+
+.exo-cue {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* ---------- Time Timer ---------- */
+
+.timetimer {
+  position: relative;
+  width: min(46vw, 210px);
+  margin: 0 auto 12px;
+  aspect-ratio: 1;
+}
+
+.timetimer svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+}
+
+.tt-track {
+  fill: #12171f;
+  stroke: none;
+}
+
+.tt-rim {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+}
+
+.tt-wedge {
+  fill: var(--accent);
+}
+
+.timetimer.rest .tt-wedge {
+  fill: var(--rest);
+}
+
+.tt-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.tt-seconds {
+  font-size: 44px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+.tt-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* ---------- Commandes ---------- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
+.btn {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 22px;
+  font-weight: 600;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: transparent;
+  color: #0e1116;
+}
+
+.btn.round {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 20px;
+}
+
+.btn.round.big {
+  width: 82px;
+  height: 82px;
+  font-size: 26px;
+}
+
+.btn.slim {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.secondary-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  min-height: 34px;
+}
+
+.upcoming {
+  flex: 1;
+  text-align: right;
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.global-bar {
+  height: 4px;
+  margin-top: 12px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.global-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.25s linear;
+}
+
+/* ---------- Fin ---------- */
+
+.finished {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.finished h2 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.finished-meta {
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* ---------- Paysage : tablette posée par terre ---------- */
+
+@media (orientation: landscape) and (max-height: 560px) {
+  .screen {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1fr minmax(240px, 34%);
+    grid-template-rows: auto 1fr auto;
+    column-gap: 18px;
+    align-items: center;
+  }
+
+  .topbar {
+    grid-column: 1 / -1;
+  }
+
+  .stage {
+    grid-row: 2;
+  }
+
+  .figure {
+    max-height: none;
+  }
+
+  .info {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .timetimer {
+    grid-column: 2;
+    grid-row: 2;
+    width: min(30vh, 180px);
+    margin-bottom: 0;
+  }
+
+  .controls,
+  .secondary-controls {
+    grid-column: 2;
+  }
+
+  .controls {
+    grid-row: 3;
+  }
+
+  .secondary-controls,
+  .global-bar {
+    display: none;
+  }
+}
+
+/* ---------- Planche de contrôle des schémas (?poses) ---------- */
+
+.posesheet {
+  padding: 24px 20px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.posesheet h1 {
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
+.posesheet section {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+}
+
+.posesheet h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.posesheet .num {
+  font-size: 12px;
+  color: var(--bg);
+  background: var(--work);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+
+.posesheet .cycle {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.posesheet .row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.posesheet .cell {
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.posesheet .cell span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.posesheet .cell .figure {
+  max-height: none;
+  height: 130px;
+}
+
+.posesheet .photo-cell img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+}
