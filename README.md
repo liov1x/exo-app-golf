@@ -8,8 +8,13 @@ Construite à partir de la planche photo « MOBILITE » (29 exercices).
 
 ## État : prototype
 
-6 exercices sur 29 sont implémentés (n° 1, 4, 12, 18, 19, 24), un par famille de
-position, pour valider le style avant de dessiner le reste.
+6 exercices sur 28 sont implémentés (n° 1, 4, 12, 18, 19, 24), un par famille de
+position, pour valider le style avant de dessiner le reste. Trois d'entre eux
+(12, 18, 24) portent encore un mouvement faux, relevé pendant la validation du
+catalogue et pas encore corrigé.
+
+La planche compte 29 photos mais 28 exercices : les 27 et 28 sont deux vues du
+même mouvement.
 
 Les **29 photos** sont en revanche déjà découpées depuis le PDF d'origine
 (`public/photos/exo-01.jpg` … `exo-29.jpg`).
@@ -138,12 +143,13 @@ et le prochain exercice est annoncé à voix haute pendant la transition.
 
 ## Reste à faire
 
-- **Faire valider le nom et la consigne des 23 exercices manquants avant de les
-  dessiner.** La planche ne porte aucun texte : tout est déduit des photos, et
-  l'exercice 4 a d'abord été dessiné comme un simple genou replié au sol alors
-  qu'il s'agit d'un bassin enroulé en l'air, genoux aux épaules. Une pose fausse
-  est plus coûteuse à corriger qu'une intention confirmée d'avance.
-- Dessiner les 23 exercices manquants (poses clés, courbure du dos, plans)
+- **Finir de faire valider le catalogue avant de dessiner.** La planche ne porte
+  aucun texte : tout nom et toute consigne est une lecture des photos, et cette
+  lecture s'est déjà trompée quatre fois sur six. `docs/catalogue.md` tient
+  l'état de chaque exercice, et `docs/fiche-*.png` sert à le relire photo à
+  l'appui (`python3 tools/fiche-validation.py` pour régénérer).
+- Dessiner les exercices manquants (poses clés, courbure du dos, plans), en
+  suivant les notes de dessin du catalogue
 - Éditeur de séances : composer, régler les durées, réordonner
 - Historique local des séances
 - Publication sur GitHub Pages

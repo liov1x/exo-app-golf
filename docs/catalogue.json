@@ -1,0 +1,130 @@
+{
+  "note": "Catalogue des exercices de la planche MOBILITE. La planche ne porte aucun texte : tout nom et toute consigne vient d'une lecture des photos, puis d'une validation. statut = valide (confirmé par Lionel) | propose (lecture nette, à valider) | incertain (à confirmer avant de dessiner).",
+  "exercices": [
+    { "id": 1, "photos": [1], "nom": "Pont fessier",
+      "consigne": "Pieds ancrés, monte le bassin, redescends vertèbre par vertèbre.",
+      "position": "Au sol", "duree": 45, "bilateral": false, "statut": "propose" },
+
+    { "id": 2, "photos": [2], "nom": "Bascule du bassin, dos au sol",
+      "consigne": "Genoux pliés, pieds au sol : bascule le bassin sans décoller les épaules.",
+      "position": "Au sol", "duree": 40, "bilateral": false, "statut": "incertain",
+      "question": "Très proche du 1. Est-ce un pont fessier plus bas, ou une simple bascule du bassin sans monter ?" },
+
+    { "id": 3, "photos": [3], "nom": "Étirement ischio-jambiers",
+      "consigne": "Une jambe tendue vers le haut, tenue à la main, l'autre à plat.",
+      "position": "Au sol", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 4, "photos": [4], "nom": "Bassin enroulé, genoux aux épaules",
+      "consigne": "Enroule le bassin vers le haut, amène les genoux au niveau des épaules.",
+      "position": "Au sol", "duree": 40, "bilateral": false, "statut": "valide" },
+
+    { "id": 5, "photos": [5], "nom": "Rotation lombaire, jambe par-dessus",
+      "consigne": "Bras en croix : passe une jambe par-dessus le corps vers le côté opposé.",
+      "position": "Au sol", "duree": 30, "bilateral": true, "statut": "propose",
+      "dessin": "rotation — vue de trois quarts" },
+
+    { "id": 6, "photos": [6], "nom": "Genoux basculés, bras en croix",
+      "consigne": "Genoux pliés : bascule les deux genoux ensemble à droite, puis à gauche.",
+      "position": "Au sol", "duree": 40, "bilateral": true, "statut": "incertain",
+      "question": "Décrit maintenant exactement le même mouvement que le 7. Seuls les bras changent (en croix ici, en chandelier au 7) — ou le 6 est-il autre chose ?",
+      "dessin": "rotation — vue de trois quarts" },
+
+    { "id": 7, "photos": [7], "nom": "Genoux basculés, bras en chandelier",
+      "consigne": "Genoux pliés serrés : bascule les deux genoux ensemble à droite, puis à gauche. Coudes pliés au sol.",
+      "position": "Au sol", "duree": 40, "bilateral": true, "statut": "valide",
+      "dessin": "rotation — vue de trois quarts" },
+
+    { "id": 8, "photos": [8], "nom": "Papillon allongé",
+      "consigne": "Plantes de pieds l'une contre l'autre : ouvre et referme les genoux.",
+      "position": "Au sol", "duree": 40, "bilateral": false, "statut": "propose" },
+
+    { "id": 9, "photos": [9], "nom": "Genou remonté sur le côté, à plat ventre",
+      "consigne": "À plat ventre : remonte un genou sur le côté, puis l'autre.",
+      "position": "Sur le ventre", "duree": 30, "bilateral": true, "statut": "valide",
+      "dessin": "vue de dessus ou de trois quarts — de profil, le genou qui remonte sur le côté ne se voit pas" },
+
+    { "id": 10, "photos": [10], "nom": "Jambe qui glisse sur le côté",
+      "consigne": "Bras en croix : fais glisser une jambe tendue sur le côté, puis reviens.",
+      "position": "Au sol", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 11, "photos": [11], "nom": "Extension du dos en appui sur les mains",
+      "consigne": "À plat ventre : pousse sur les mains, ouvre la poitrine, bassin au sol.",
+      "position": "Sur le ventre", "duree": 30, "bilateral": false, "statut": "propose" },
+
+    { "id": 12, "photos": [12], "nom": "Dos rond, dos plat (le chat)",
+      "consigne": "À quatre pattes : arrondis le dos, puis reviens au plat. Mains et genoux fixes.",
+      "position": "Quatre pattes", "duree": 40, "bilateral": false, "statut": "propose" },
+
+    { "id": 13, "photos": [13], "nom": "Bras sous le corps puis ouverture",
+      "consigne": "À quatre pattes : passe un bras sous l'autre, puis ouvre vers le plafond.",
+      "position": "Quatre pattes", "duree": 30, "bilateral": true, "statut": "propose",
+      "dessin": "rotation — vue de trois quarts" },
+
+    { "id": 14, "photos": [14], "nom": "Genou à la poitrine, jambe tendue arrière",
+      "consigne": "À quatre pattes : ramène le genou, puis tends la jambe vers l'arrière.",
+      "position": "Quatre pattes", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 15, "photos": [15], "nom": "Étirement des poignets, assis sur les talons",
+      "consigne": "Assis sur les talons, buste légèrement avancé : mains au sol, doigts tournés vers toi.",
+      "position": "À genoux", "duree": 30, "bilateral": false, "statut": "valide",
+      "dessin": "le personnage n'a pas de mains : l'orientation des doigts ne pourra pas se voir, la consigne devra la porter" },
+
+    { "id": 16, "photos": [16], "nom": "Étirement des chevilles, à quatre pattes",
+      "consigne": "À quatre pattes : tends une cheville, cou-de-pied au sol, puis l'autre.",
+      "position": "Quatre pattes", "duree": 30, "bilateral": true, "statut": "valide",
+      "question": "Pendant l'étirement de cheville, la jambe part-elle sur le côté comme le montre la photo, ou reste-t-elle sous le bassin ?" },
+
+    { "id": 17, "photos": [17], "nom": "Flexion avant, mains au sol",
+      "consigne": "Jambes écartées tendues : descends les mains au sol, bassin haut.",
+      "position": "Debout", "duree": 30, "bilateral": false, "statut": "propose" },
+
+    { "id": 18, "photos": [18], "nom": "Planche bras tendus",
+      "consigne": "Gainage : corps aligné de la tête aux talons, sans creuser ni arrondir.",
+      "position": "Quatre pattes", "duree": 30, "bilateral": false, "statut": "propose",
+      "tenue": true, "dessin": "position tenue — une seule pose, pas d'animation" },
+
+    { "id": 19, "photos": [19], "nom": "Fente, bras au ciel",
+      "consigne": "Grande fente : le bras arrière monte et s'étire vers le haut.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 20, "photos": [20], "nom": "Fente écartée, ouverture du bras",
+      "consigne": "En fente large : ouvre un bras vers l'arrière, le regard suit.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 21, "photos": [21], "nom": "Fente genou au sol, rotation du buste",
+      "consigne": "Genou arrière au sol : ouvre les deux bras et tourne le buste.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "propose",
+      "dessin": "rotation — vue de trois quarts" },
+
+    { "id": 22, "photos": [22], "nom": "Fente genou au sol, bras levé",
+      "consigne": "Genou arrière au sol : monte le bras du côté arrière et grandis-toi.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 23, "photos": [23], "nom": "Grand étirement vertical",
+      "consigne": "Debout, mains jointes au-dessus : pousse vers le haut, légère extension.",
+      "position": "Debout", "duree": 30, "bilateral": false, "statut": "propose" },
+
+    { "id": 24, "photos": [24], "nom": "Debout jambes écartées, bras au-dessus",
+      "consigne": "Pieds largement écartés, bras tendus au-dessus : grandis-toi.",
+      "position": "Debout", "duree": 40, "bilateral": false, "statut": "propose" },
+
+    { "id": 25, "photos": [25], "nom": "Rotation du buste debout",
+      "consigne": "Jambes écartées : tourne le buste d'un côté, le bras ouvre en arrière.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "propose",
+      "dessin": "rotation — vue de trois quarts" },
+
+    { "id": 26, "photos": [26], "nom": "Inclinaison latérale, bras au-dessus",
+      "consigne": "Jambes écartées, bras tendu au-dessus : incline le buste sur le côté.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "propose" },
+
+    { "id": 27, "photos": [27, 28], "nom": "Ouverture d'épaule",
+      "consigne": "Debout : emmène le bras vers l'arrière pour ouvrir l'épaule.",
+      "position": "Debout", "duree": 30, "bilateral": true, "statut": "valide",
+      "dessin": "réunit les photos 27 et 28, qui montrent le même exercice" },
+
+    { "id": 29, "photos": [29], "nom": "Rotation des épaules, paumes qui tournent",
+      "consigne": "Bras le long du corps : ouvre et referme les paumes vers l'extérieur.",
+      "position": "Debout", "duree": 30, "bilateral": false, "statut": "incertain",
+      "question": "Est-ce la même ouverture d'épaule que le 27, ou un mouvement distinct des paumes ?" }
+  ]
+}
