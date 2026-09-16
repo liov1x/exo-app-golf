@@ -222,34 +222,29 @@ button {
   stroke-linecap: round;
 }
 
-.figure .limb {
+/* Couleur du « papier » : c'est elle qui creuse l'intérieur du personnage.
+   Elle doit coller au fond réel derrière la figure. */
+.figure {
+  --figure-paper: var(--bg);
+}
+
+.figure polyline {
   fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.figure .stroke-outline polyline {
   stroke: var(--text);
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
-.figure .limb polyline {
-  fill: none;
-  stroke: inherit;
-  stroke-width: inherit;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.figure .far {
-  stroke: #56627a;
-  stroke-width: 4;
-}
-
-.figure .spine {
-  stroke: var(--accent);
-  stroke-width: 7;
+.figure .stroke-body polyline {
+  stroke: var(--figure-paper);
 }
 
 .figure .head {
-  fill: var(--text);
+  fill: var(--figure-paper);
+  stroke: var(--text);
 }
 
 .next-up {
@@ -591,6 +586,7 @@ button {
 .posesheet .cell .figure {
   max-height: none;
   height: 130px;
+  --figure-paper: var(--panel);
 }
 
 .posesheet .photo-cell img {

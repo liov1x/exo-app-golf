@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { GROUND_Y, poseAtCycle, poseView, type Pose } from '../lib/pose'
+import { BODY, GROUND_Y, poseAtCycle, poseView, resolveHead, type Point, type Pose } from '../lib/pose'
 
 type Props = {
   frames: Pose[]
@@ -9,13 +9,48 @@ type Props = {
   running: boolean
   /** Inverse la figure pour le côté droit. */
   mirrored?: boolean
+  /**
+   * Passe le bras avant derrière le corps.
+   *
+   * Quand la main revient toucher le corps — genoux tenus à la poitrine, bras
+   * le long du tronc — un bras dessiné devant fusionne avec lui en un pâté.
+   * Derrière, le contour du tronc le recoupe et le geste redevient lisible.
+   */
+  armsBehind?: boolean
+}
+
+type Segment = { pts: Point[]; w: number }
+
+const path = (pts: Point[]) => pts.map((pt) => `${pt[0]},${pt[1]}`).join(' ')
+
+/**
+ * Un groupe de membres, tracé deux fois : d'abord épais dans la couleur du
+ * contour, puis un peu plus fin dans la couleur du fond. La seconde passe
+ * efface les contours INTERNES du groupe, et il ne reste que la silhouette —
+ * c'est ce qui donne un personnage cerné plutôt qu'un empilement de traits.
+ */
+function Part({ segments }: { segments: Segment[] }) {
+  return (
+    <g>
+      <g className="stroke-outline">
+        {segments.map((s, i) => (
+          <polyline key={i} points={path(s.pts)} strokeWidth={s.w + BODY.outline * 2} />
+        ))}
+      </g>
+      <g className="stroke-body">
+        {segments.map((s, i) => (
+          <polyline key={i} points={path(s.pts)} strokeWidth={s.w} />
+        ))}
+      </g>
+    </g>
+  )
 }
 
 /**
- * Le bonhomme animé. Il rejoue le mouvement en boucle au tempo de l'exercice :
+ * Le personnage animé. Il rejoue le mouvement en boucle au tempo de l'exercice :
  * c'est autant un schéma qu'un métronome visuel — on cale sa lenteur dessus.
  */
-export function Figure({ frames, cycle, running, mirrored }: Props) {
+export function Figure({ frames, cycle, running, mirrored, armsBehind }: Props) {
   const [pose, setPose] = useState<Pose>(frames[0])
   const elapsed = useRef(0)
   const last = useRef<number | null>(null)
@@ -47,7 +82,21 @@ export function Figure({ frames, cycle, running, mirrored }: Props) {
   }, [frames, cycle, running])
 
   const view = useMemo(() => poseView(frames), [frames])
-  const p = (pt: readonly [number, number]) => `${pt[0]},${pt[1]}`
+  const head = resolveHead(pose)
+
+  // Les membres arrière forment un groupe à part, dessiné en premier : le
+  // contour du corps passe donc devant eux et les deux jambes se distinguent.
+  const nearArm: Segment = { pts: [pose.neck, pose.elbowA, pose.handA], w: BODY.arm }
+  const behind: Segment[] = [
+    { pts: [pose.neck, pose.elbowB, pose.handB], w: BODY.arm },
+    { pts: [pose.hip, pose.kneeB, pose.footB], w: BODY.leg },
+    ...(armsBehind ? [nearArm] : []),
+  ]
+  const front: Segment[] = [
+    { pts: [pose.neck, pose.hip], w: BODY.torso },
+    { pts: [pose.hip, pose.kneeA, pose.footA], w: BODY.leg },
+    ...(armsBehind ? [] : [nearArm]),
+  ]
 
   return (
     <svg
@@ -61,22 +110,10 @@ export function Figure({ frames, cycle, running, mirrored }: Props) {
         <line className="ground" x1={view.x + 2} y1={GROUND_Y} x2={view.x + view.w - 2} y2={GROUND_Y} />
       )}
 
-      {/* Membres arrière : plus pâles, ils posent la profondeur */}
-      <g className="limb far">
-        <polyline points={`${p(pose.neck)} ${p(pose.elbowB)} ${p(pose.handB)}`} />
-        <polyline points={`${p(pose.hip)} ${p(pose.kneeB)} ${p(pose.footB)}`} />
-      </g>
+      <Part segments={behind} />
+      <Part segments={front} />
 
-      {/* Tronc */}
-      <line className="limb spine" x1={pose.neck[0]} y1={pose.neck[1]} x2={pose.hip[0]} y2={pose.hip[1]} />
-
-      {/* Membres avant */}
-      <g className="limb near">
-        <polyline points={`${p(pose.neck)} ${p(pose.elbowA)} ${p(pose.handA)}`} />
-        <polyline points={`${p(pose.hip)} ${p(pose.kneeA)} ${p(pose.footA)}`} />
-      </g>
-
-      <circle className="head" cx={pose.head[0]} cy={pose.head[1]} r="9" />
+      <circle className="head" cx={head[0]} cy={head[1]} r={BODY.headRadius} strokeWidth={BODY.outline * 2} />
     </svg>
   )
 }

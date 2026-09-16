@@ -1,14 +1,16 @@
 /**
- * Modèle de bonhomme schématique.
+ * Modèle de bonhomme pictogramme.
  *
- * Toutes les coordonnées vivent dans un repère fixe de 200 x 140 unités,
- * avec le sol à y = 125. Un adulte debout mesure ~100 unités, allongé il
- * occupe ~110 unités de long : les deux tiennent dans le même cadre, donc
- * le bonhomme ne « saute » pas d'échelle entre deux exercices.
+ * Les poses sont décrites par des articulations, mais le rendu est un
+ * personnage cerné d'un contour, tête détachée — pas un squelette de traits.
+ * Le squelette n'est que l'ossature : c'est `Figure` qui l'épaissit en corps.
  *
- * Le côté A est le membre le plus proche du spectateur (tracé plein),
- * le côté B celui qui est derrière (tracé plus pâle) : ça suffit à donner
- * la profondeur sans dessiner un vrai corps.
+ * Toutes les coordonnées vivent dans un repère de 200 x 140 unités, avec le
+ * sol à y = 125. Un adulte debout mesure ~100 unités.
+ *
+ * Le côté A est le membre le plus proche du spectateur, le côté B celui qui
+ * est derrière : B est dessiné en premier, donc le contour de A passe devant
+ * et les membres se détachent les uns des autres.
  */
 export type Point = readonly [number, number]
 
@@ -27,6 +29,41 @@ export type Pose = {
 }
 
 export const GROUND_Y = 125
+
+/**
+ * Épaisseurs du personnage, en unités du repère.
+ *
+ * Le tronc est nettement plus large que les membres : c'est ce qui distingue
+ * un pictogramme d'un bonhomme fil de fer.
+ */
+export const BODY = {
+  torso: 15,
+  arm: 7.5,
+  leg: 10.5,
+  /** Épaisseur du trait de contour, de chaque côté de la forme. */
+  outline: 2.2,
+  headRadius: 8.5,
+  /** Espace entre le haut du tronc et la tête : elle doit rester détachée. */
+  headGap: 2.5,
+} as const
+
+/**
+ * Position réelle de la tête.
+ *
+ * Les poses donnent une tête approximative : on garde sa DIRECTION (c'est elle
+ * qui porte l'intention — tête au sol, tête relevée, tête dans l'axe) mais on
+ * impose la distance, pour que le détachement tête / épaules soit identique
+ * partout sans avoir à régler 29 exercices à la main.
+ */
+export function resolveHead(pose: Pose): Point {
+  const [hx, hy] = pose.head
+  const [nx, ny] = pose.neck
+  const dx = hx - nx
+  const dy = hy - ny
+  const len = Math.hypot(dx, dy) || 1
+  const reach = BODY.torso / 2 + BODY.headRadius + BODY.headGap
+  return [nx + (dx / len) * reach, ny + (dy / len) * reach]
+}
 
 export const JOINTS = [
   'head', 'neck', 'hip',
@@ -77,15 +114,23 @@ export type View = { x: number; y: number; w: number; h: number; ground: boolean
  * englobante de TOUTES les poses clés — sur toutes les poses, pour que la
  * figure ne saute pas d'échelle pendant l'animation — et on cadre dessus.
  */
-export function poseView(frames: Pose[], headRadius = 9, pad = 10): View {
+export function poseView(frames: Pose[], pad = 6): View {
   let minX = Infinity
   let minY = Infinity
   let maxX = -Infinity
   let maxY = -Infinity
+  // Chaque articulation est épaissie par la chair qu'elle porte, sinon le
+  // cadre coupe le contour du personnage.
+  const reach = (joint: string) => {
+    if (joint === 'head') return BODY.headRadius + BODY.outline
+    if (joint === 'neck' || joint === 'hip') return BODY.torso / 2 + BODY.outline
+    if (joint.startsWith('knee') || joint.startsWith('foot')) return BODY.leg / 2 + BODY.outline
+    return BODY.arm / 2 + BODY.outline
+  }
   for (const f of frames) {
     for (const j of JOINTS) {
-      const [x, y] = f[j]
-      const r = j === 'head' ? headRadius : 0
+      const [x, y] = j === 'head' ? resolveHead(f) : f[j]
+      const r = reach(j)
       minX = Math.min(minX, x - r)
       minY = Math.min(minY, y - r)
       maxX = Math.max(maxX, x + r)

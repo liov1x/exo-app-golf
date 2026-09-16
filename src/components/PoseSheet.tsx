@@ -19,12 +19,12 @@ export function PoseSheet() {
           </h2>
           <div className="row">
             <div className="cell">
-              <Figure frames={e.frames} cycle={e.cycle} running />
+              <Figure frames={e.frames} cycle={e.cycle} running armsBehind={e.armsBehind} />
               <span>animé</span>
             </div>
             {e.frames.map((f, i) => (
               <div className="cell" key={i}>
-                <Figure frames={[f]} cycle={e.cycle} running={false} />
+                <Figure frames={[f]} cycle={e.cycle} running={false} armsBehind={e.armsBehind} />
                 <span>pose {i + 1}</span>
               </div>
             ))}

@@ -17,6 +17,8 @@ export type Exercise = {
   cycle: number
   /** Poses clés du schéma animé. */
   frames: Pose[]
+  /** Dessine le bras avant derrière le corps, quand la main revient le toucher. */
+  armsBehind?: boolean
   /** Photo d'origine découpée de la planche PDF. */
   photo: string
 }
@@ -41,20 +43,21 @@ export const EXERCISES: Exercise[] = [
     bilateral: false,
     cycle: 6,
     photo: 'photos/exo-01.jpg',
+    armsBehind: true,
     frames: [
       {
         head: [46, 116], neck: [58, 119], hip: [98, 119],
         elbowA: [74, 124], handA: [90, 124],
         elbowB: [72, 127], handB: [88, 128],
         kneeA: [118, 96], footA: [132, 124],
-        kneeB: [116, 100], footB: [130, 125],
+        kneeB: [110, 101], footB: [126, 125],
       },
       {
         head: [46, 116], neck: [58, 119], hip: [98, 92],
         elbowA: [74, 124], handA: [90, 124],
         elbowB: [72, 127], handB: [88, 128],
         kneeA: [120, 86], footA: [132, 124],
-        kneeB: [118, 90], footB: [130, 125],
+        kneeB: [112, 92], footB: [126, 125],
       },
     ],
   },
@@ -67,13 +70,14 @@ export const EXERCISES: Exercise[] = [
     bilateral: false,
     cycle: 5,
     photo: 'photos/exo-04.jpg',
+    armsBehind: true,
     frames: [
       {
         head: [46, 116], neck: [58, 118], hip: [104, 119],
-        elbowA: [76, 112], handA: [94, 100],
-        elbowB: [76, 116], handB: [92, 104],
-        kneeA: [94, 98], footA: [112, 106],
-        kneeB: [92, 102], footB: [110, 110],
+        elbowA: [78, 114], handA: [96, 106],
+        elbowB: [78, 118], handB: [94, 110],
+        kneeA: [96, 96], footA: [114, 104],
+        kneeB: [94, 100], footB: [112, 108],
       },
       {
         head: [48, 114], neck: [60, 116], hip: [100, 118],
@@ -173,25 +177,25 @@ export const EXERCISES: Exercise[] = [
     photo: 'photos/exo-24.jpg',
     frames: [
       {
-        head: [90, 30], neck: [93, 42], hip: [100, 74],
-        elbowA: [105, 24], handA: [98, 6],
-        elbowB: [76, 34], handB: [74, 14],
-        kneeA: [112, 98], footA: [118, 124],
-        kneeB: [88, 98], footB: [82, 124],
+        head: [87, 32], neck: [93, 44], hip: [100, 76],
+        elbowA: [112, 30], handA: [110, 8],
+        elbowB: [76, 38], handB: [68, 20],
+        kneeA: [112, 100], footA: [118, 124],
+        kneeB: [88, 100], footB: [82, 124],
       },
       {
-        head: [100, 26], neck: [100, 40], hip: [100, 74],
-        elbowA: [114, 26], handA: [110, 6],
-        elbowB: [86, 26], handB: [90, 6],
-        kneeA: [112, 98], footA: [118, 124],
-        kneeB: [88, 98], footB: [82, 124],
+        head: [100, 28], neck: [100, 42], hip: [100, 76],
+        elbowA: [116, 30], handA: [120, 9],
+        elbowB: [84, 30], handB: [80, 9],
+        kneeA: [112, 100], footA: [118, 124],
+        kneeB: [88, 100], footB: [82, 124],
       },
       {
-        head: [110, 30], neck: [107, 42], hip: [100, 74],
-        elbowA: [124, 34], handA: [126, 14],
-        elbowB: [95, 24], handB: [102, 6],
-        kneeA: [112, 98], footA: [118, 124],
-        kneeB: [88, 98], footB: [82, 124],
+        head: [113, 32], neck: [107, 44], hip: [100, 76],
+        elbowA: [124, 38], handA: [132, 20],
+        elbowB: [88, 30], handB: [90, 8],
+        kneeA: [112, 100], footA: [118, 124],
+        kneeB: [88, 100], footB: [82, 124],
       },
     ],
   },
