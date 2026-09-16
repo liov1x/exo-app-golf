@@ -168,6 +168,9 @@ export function poseAtCycle(frames: Pose[], progress: number): Pose {
   return lerpPose(frames[i], frames[i + 1], easeInOut(scaled - i))
 }
 
+/** D'où l'on regarde le mouvement. Décide aussi de ce qui marque le sol. */
+export type Viewpoint = 'profil' | 'face' | 'dessus' | 'troisquarts'
+
 export type View = { x: number; y: number; w: number; h: number; ground: boolean }
 
 /**
@@ -178,7 +181,7 @@ export type View = { x: number; y: number; w: number; h: number; ground: boolean
  * englobante de TOUTES les poses clés — sur toutes les poses, pour que la
  * figure ne saute pas d'échelle pendant l'animation — et on cadre dessus.
  */
-export function poseView(frames: Pose[], withGround = true, pad = 6): View {
+export function poseView(frames: Pose[], viewpoint: Viewpoint = 'profil', pad = 6): View {
   let minX = Infinity
   let minY = Infinity
   let maxX = -Infinity
@@ -207,8 +210,10 @@ export function poseView(frames: Pose[], withGround = true, pad = 6): View {
     const [cx, cy] = spineControl(f)
     swallow(cx, cy, BODY.torso / 2 + BODY.outline)
   }
-  // Le sol ne fait partie du cadre que si le corps le touche vraiment.
-  const ground = withGround && maxY >= GROUND_Y - 4
+  // Le trait de sol n'a de sens que vu de profil ou de face, et seulement si
+  // le corps le touche vraiment.
+  const onFloor = viewpoint === 'profil' || viewpoint === 'face'
+  const ground = onFloor && maxY >= GROUND_Y - 4
   if (ground) maxY = Math.max(maxY, GROUND_Y)
 
   let x = minX - pad

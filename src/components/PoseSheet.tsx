@@ -15,7 +15,9 @@ export function PoseSheet() {
         <section key={e.id}>
           <h2>
             <span className="num">{e.id}</span> {e.name}
-            <span className="cycle">{e.cycle}s / aller-retour</span>
+            <span className="cycle">
+              {e.hold ? 'position tenue' : `${e.cycle}s / aller-retour`}
+            </span>
           </h2>
           <div className="row">
             <div className="cell">
@@ -27,7 +29,7 @@ export function PoseSheet() {
                 singleArm={e.singleArm}
                 singleLeg={e.singleLeg}
                 legInFront={e.legInFront}
-                ground={!e.noGround}
+                view={e.view}
               />
               <span>animé</span>
             </div>
@@ -41,7 +43,7 @@ export function PoseSheet() {
                   singleArm={e.singleArm}
                   singleLeg={e.singleLeg}
                   legInFront={e.legInFront}
-                  ground={!e.noGround}
+                  view={e.view}
                 />
                 <span>pose {i + 1}</span>
               </div>

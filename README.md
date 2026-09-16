@@ -6,15 +6,15 @@ un personnage pictogramme rejoue le mouvement en direct, au tempo.
 
 Construite à partir de la planche photo « MOBILITE » (29 exercices).
 
-## État : prototype
+## État
 
-6 exercices sur 28 sont implémentés (n° 1, 4, 12, 18, 19, 24), un par famille de
-position, pour valider le style avant de dessiner le reste. Trois d'entre eux
-(12, 18, 24) portent encore un mouvement faux, relevé pendant la validation du
-catalogue et pas encore corrigé.
+Les **27 exercices sont dessinés**, chacun avec ses poses clés, sa courbure de
+dos et son point de vue. La planche compte 29 photos : les 27, 28 et 29 sont
+trois vues du même mouvement, réunies en un seul exercice.
 
-La planche compte 29 photos mais 28 exercices : les 27 et 28 sont deux vues du
-même mouvement.
+Neuf noms et consignes ont été confirmés par Lionel, les autres attendent sa
+relecture — `docs/catalogue.md` tient le compte. Les schémas eux-mêmes sont un
+premier jet : ils se lisent, mais ils n'ont pas été relus un par un.
 
 Les **29 photos** sont en revanche déjà découpées depuis le PDF d'origine
 (`public/photos/exo-01.jpg` … `exo-29.jpg`).
@@ -121,19 +121,32 @@ Trois réglages par exercice, dans cet ordre de fréquence :
 - `noGround` — coupe le trait de sol, qui n'a pas de sens hors des vues
   orthogonales.
 
-### Quand passer en trois quarts
+### D'où l'on regarde
 
-Le modèle accepte n'importe quelle projection : une vue de trois quarts n'est
-qu'un autre placement des articulations, avec `noGround`.
+`view` choisit le point de vue, et surtout ce qui situe le corps dans l'espace :
 
-Essayé sur les genoux à la poitrine et sur le quatre-pattes : dans les deux cas
-c'était moins lisible que le profil, le corps devenant une masse sans axe
-clair. Ces deux schémas ont été refaits de profil.
+| Vue | Ce qui marque le sol | Pour quoi |
+| --- | --- | --- |
+| `profil` (défaut) | trait de sol | la plupart des mouvements |
+| `face` | trait de sol | debout, quand le mouvement est latéral |
+| `dessus` | un tapis | allongé, quand tout se joue sur les côtés |
+| `troisquarts` | rien | quand aucun des deux ne serait juste |
 
-Le trois quarts se justifie quand le profil cache le mouvement lui-même —
-typiquement les rotations, où tout se passe dans la profondeur : la rotation
-lombaire genoux au sol (n° 6) ou l'ouverture du bras à quatre pattes (n° 13).
-Pas avant.
+Le tapis n'est pas décoratif : **vue de dessus, une personne allongée se lit
+exactement comme une personne debout vue de face**. Sans lui, la rotation
+lombaire ressemble à quelqu'un qui danse.
+
+Le trois quarts a d'abord été essayé sur les genoux à la poitrine et sur le
+quatre-pattes : moins lisible que le profil dans les deux cas, le corps perdant
+son axe. Il ne sert donc que là où le profil cache le mouvement lui-même — le
+passage du bras sous le corps (n° 13). Pour les rotations au sol, la vue de
+dessus s'est révélée plus claire.
+
+### Les positions tenues
+
+`hold` marque un exercice sans mouvement, comme la planche : le schéma ne
+s'anime pas, il n'y a pas de tempo à suivre. Le moteur le gère avec une seule
+pose clé.
 
 ### Le son porte l'information
 
@@ -148,8 +161,9 @@ et le prochain exercice est annoncé à voix haute pendant la transition.
   lecture s'est déjà trompée quatre fois sur six. `docs/catalogue.md` tient
   l'état de chaque exercice, et `docs/fiche-*.png` sert à le relire photo à
   l'appui (`python3 tools/fiche-validation.py` pour régénérer).
-- Dessiner les exercices manquants (poses clés, courbure du dos, plans), en
-  suivant les notes de dessin du catalogue
+- Relire les 27 schémas un par un, photo à l'appui : ils sont un premier jet
+- Reprendre le passage du bras sous le corps (n° 13), le seul trois quarts, qui
+  reste confus en position basse
 - Éditeur de séances : composer, régler les durées, réordonner
 - Historique local des séances
 - Publication sur GitHub Pages

@@ -73,9 +73,8 @@
       "position": "Au sol",
       "duree": 40,
       "bilateral": true,
-      "statut": "incertain",
-      "question": "Décrit maintenant exactement le même mouvement que le 7. Seuls les bras changent (en croix ici, en chandelier au 7) — ou le 6 est-il autre chose ?",
-      "dessin": "rotation — vue de trois quarts"
+      "statut": "valide",
+      "dessin": "identique au 7, seuls les bras changent : en croix ici, en chandelier au 7 — vue de dessus"
     },
     {
       "id": 7,
@@ -88,7 +87,7 @@
       "duree": 40,
       "bilateral": true,
       "statut": "valide",
-      "dessin": "rotation — vue de trois quarts"
+      "dessin": "identique au 6, seuls les bras changent : en chandelier ici — vue de dessus"
     },
     {
       "id": 8,
@@ -194,13 +193,12 @@
       "photos": [
         16
       ],
-      "nom": "Étirement des chevilles, à quatre pattes",
-      "consigne": "À quatre pattes : tends une cheville, cou-de-pied au sol, puis l'autre.",
+      "nom": "Étirement de la cheville, jambe arrière tendue",
+      "consigne": "À quatre pattes : allonge une jambe vers l'arrière pour étirer la cheville, puis l'autre.",
       "position": "Quatre pattes",
       "duree": 30,
       "bilateral": true,
-      "statut": "valide",
-      "question": "Pendant l'étirement de cheville, la jambe part-elle sur le côté comme le montre la photo, ou reste-t-elle sous le bassin ?"
+      "statut": "valide"
     },
     {
       "id": 17,
@@ -330,7 +328,8 @@
       "id": 27,
       "photos": [
         27,
-        28
+        28,
+        29
       ],
       "nom": "Ouverture d'épaule",
       "consigne": "Debout : emmène le bras vers l'arrière pour ouvrir l'épaule.",
@@ -338,20 +337,7 @@
       "duree": 30,
       "bilateral": true,
       "statut": "valide",
-      "dessin": "réunit les photos 27 et 28, qui montrent le même exercice"
-    },
-    {
-      "id": 29,
-      "photos": [
-        29
-      ],
-      "nom": "Rotation des épaules, paumes qui tournent",
-      "consigne": "Bras le long du corps : ouvre et referme les paumes vers l'extérieur.",
-      "position": "Debout",
-      "duree": 30,
-      "bilateral": false,
-      "statut": "incertain",
-      "question": "Est-ce la même ouverture d'épaule que le 27, ou un mouvement distinct des paumes ?"
+      "dessin": "réunit les photos 27, 28 et 29 : un seul exercice vu sous trois angles"
     }
   ]
 }

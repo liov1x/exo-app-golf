@@ -9,6 +9,7 @@ import {
   spineControl,
   type Point,
   type Pose,
+  type Viewpoint,
 } from '../lib/pose'
 
 type Props = {
@@ -27,8 +28,15 @@ type Props = {
    * Derrière, le contour du tronc le recoupe et le geste redevient lisible.
    */
   armsBehind?: boolean
-  /** Trait de sol. À couper sur les vues de trois quarts, où il n'a pas de sens. */
-  ground?: boolean
+  /**
+   * D'où l'on regarde le mouvement.
+   *
+   * Décide de ce qui situe le corps dans l'espace : un trait de sol de profil
+   * et de face, un tapis vu de dessus — sans quoi une personne allongée vue de
+   * dessus se lit exactement comme une personne debout vue de face — et rien
+   * du tout de trois quarts, où aucun des deux ne serait juste.
+   */
+  view?: Viewpoint
   /**
    * Cache le membre du fond.
    *
@@ -97,7 +105,7 @@ export function Figure({
   running,
   mirrored,
   armsBehind,
-  ground = true,
+  view = 'profil',
   singleArm,
   singleLeg,
   legInFront,
@@ -132,7 +140,7 @@ export function Figure({
     }
   }, [frames, cycle, running])
 
-  const view = useMemo(() => poseView(frames, ground), [frames, ground])
+  const box = useMemo(() => poseView(frames, view), [frames, view])
 
   // Le zoom réel de cette figure, mesuré à l'écran : c'est lui qui convertit
   // l'épaisseur de contour voulue en pixels vers les unités du repère.
@@ -143,15 +151,15 @@ export function Figure({
     const el = svg.current
     if (!el) return
     const measure = () => {
-      const box = el.getBoundingClientRect()
-      if (!box.width || !box.height) return
-      setPxPerUnit(Math.min(box.width / view.w, box.height / view.h))
+      const rect = el.getBoundingClientRect()
+      if (!rect.width || !rect.height) return
+      setPxPerUnit(Math.min(rect.width / box.w, rect.height / box.h))
     }
     measure()
     const observer = new ResizeObserver(measure)
     observer.observe(el)
     return () => observer.disconnect()
-  }, [view])
+  }, [box])
 
   const outline = OUTLINE_PX / pxPerUnit
   const head = resolveHead(pose)
@@ -180,13 +188,24 @@ export function Figure({
     <svg
       ref={svg}
       className="figure"
-      viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
+      viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`}
       role="img"
       aria-label="Schéma du mouvement"
       style={mirrored ? { transform: 'scaleX(-1)' } : undefined}
     >
-      {view.ground && (
-        <line className="ground" x1={view.x + 2} y1={GROUND_Y} x2={view.x + view.w - 2} y2={GROUND_Y} />
+      {box.ground && (
+        <line className="ground" x1={box.x + 2} y1={GROUND_Y} x2={box.x + box.w - 2} y2={GROUND_Y} />
+      )}
+
+      {view === 'dessus' && (
+        <rect
+          className="mat"
+          x={(pose.neck[0] + pose.hip[0]) / 2 - 33}
+          y={box.y + 3}
+          width={66}
+          height={box.h - 6}
+          rx={9}
+        />
       )}
 
       <Part segments={behind} outline={outline} />

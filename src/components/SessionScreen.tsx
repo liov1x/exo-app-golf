@@ -75,13 +75,13 @@ export function SessionScreen({ session, onExit }: { session: Session; onExit: (
           <Figure
             frames={step.exercise.frames}
             cycle={step.exercise.cycle}
-            running={s.running}
+            running={s.running && !step.exercise.hold}
             mirrored={step.side === 'droit'}
             armsBehind={step.exercise.armsBehind}
             singleArm={step.exercise.singleArm}
             singleLeg={step.exercise.singleLeg}
             legInFront={step.exercise.legInFront}
-            ground={!step.exercise.noGround}
+            view={step.exercise.view}
           />
         ) : (
           <div className="next-up">
@@ -95,7 +95,7 @@ export function SessionScreen({ session, onExit }: { session: Session; onExit: (
               singleArm={step.exercise.singleArm}
               singleLeg={step.exercise.singleLeg}
               legInFront={step.exercise.legInFront}
-              ground={!step.exercise.noGround}
+              view={step.exercise.view}
             />
           </div>
         )}

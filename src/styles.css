@@ -222,6 +222,16 @@ button {
   stroke-linecap: round;
 }
 
+/* Le tapis, vu de dessus : il dit « au sol » là où le trait de sol ne peut rien
+   dire. Sans lui, une personne allongée vue de dessus se lit exactement comme
+   une personne debout vue de face — d'où le remplissage, qui le fait exister
+   comme surface et pas seulement comme contour. */
+.figure .mat {
+  fill: rgba(255, 255, 255, 0.05);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
 /* Couleur du « papier » : c'est elle qui creuse l'intérieur du personnage.
    Elle doit coller au fond réel derrière la figure. */
 .figure {
