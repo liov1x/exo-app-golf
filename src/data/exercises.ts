@@ -19,6 +19,15 @@ export type Exercise = {
   frames: Pose[]
   /** Dessine le bras avant derrière le corps, quand la main revient le toucher. */
   armsBehind?: boolean
+  /**
+   * De profil, un mouvement symétrique superpose les deux bras — ou les deux
+   * jambes — et celui du fond ne sort qu'en liseré. On n'en dessine alors qu'un.
+   * À laisser faux dès que les deux membres font des choses différentes.
+   */
+  singleArm?: boolean
+  singleLeg?: boolean
+  /** Coupe le trait de sol, sur les vues où il n'a pas de sens. */
+  noGround?: boolean
   /** Photo d'origine découpée de la planche PDF. */
   photo: string
 }
@@ -44,6 +53,8 @@ export const EXERCISES: Exercise[] = [
     cycle: 6,
     photo: 'photos/exo-01.jpg',
     armsBehind: true,
+    singleArm: true,
+    singleLeg: true,
     frames: [
       {
         head: [46, 116], neck: [58, 119], hip: [98, 119],
@@ -71,20 +82,25 @@ export const EXERCISES: Exercise[] = [
     cycle: 5,
     photo: 'photos/exo-04.jpg',
     armsBehind: true,
+    singleArm: true,
+    singleLeg: true,
+    // La cuisse monte franchement vers la poitrine et le tibia redescend bien
+    // à l'écart : sans cet angle, cuisse et tibia se superposent en un moignon
+    // et le bras vient refermer le tout en pâté.
     frames: [
       {
-        head: [46, 116], neck: [58, 118], hip: [104, 119],
-        elbowA: [78, 114], handA: [96, 106],
-        elbowB: [78, 118], handB: [94, 110],
-        kneeA: [96, 96], footA: [114, 104],
-        kneeB: [94, 100], footB: [112, 108],
+        head: [44, 118], neck: [56, 118], hip: [106, 118],
+        elbowA: [66, 106], handA: [78, 98],
+        elbowB: [66, 108], handB: [78, 100],
+        kneeA: [88, 94], footA: [106, 112],
+        kneeB: [88, 94], footB: [106, 112],
       },
       {
-        head: [48, 114], neck: [60, 116], hip: [100, 118],
-        elbowA: [70, 106], handA: [84, 92],
-        elbowB: [70, 110], handB: [82, 96],
-        kneeA: [84, 88], footA: [98, 102],
-        kneeB: [82, 92], footB: [96, 106],
+        head: [44, 118], neck: [56, 118], hip: [102, 118],
+        elbowA: [60, 100], handA: [70, 90],
+        elbowB: [60, 102], handB: [70, 92],
+        kneeA: [78, 82], footA: [96, 104],
+        kneeB: [78, 82], footB: [96, 104],
       },
     ],
   },
@@ -97,6 +113,10 @@ export const EXERCISES: Exercise[] = [
     bilateral: false,
     cycle: 5,
     photo: 'photos/exo-12.jpg',
+    // Essayé en trois quarts : les quatre appuis se voyaient, mais le corps
+    // devenait une masse illisible. Le profil dit la même chose plus clairement.
+    singleArm: true,
+    singleLeg: true,
     frames: [
       {
         head: [58, 80], neck: [70, 84], hip: [118, 84],
@@ -123,6 +143,7 @@ export const EXERCISES: Exercise[] = [
     bilateral: false,
     cycle: 4,
     photo: 'photos/exo-18.jpg',
+    singleArm: true,
     frames: [
       {
         head: [54, 78], neck: [66, 82], hip: [108, 102],

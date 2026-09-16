@@ -78,6 +78,9 @@ export function SessionScreen({ session, onExit }: { session: Session; onExit: (
             running={s.running}
             mirrored={step.side === 'droit'}
             armsBehind={step.exercise.armsBehind}
+            singleArm={step.exercise.singleArm}
+            singleLeg={step.exercise.singleLeg}
+            ground={!step.exercise.noGround}
           />
         ) : (
           <div className="next-up">
@@ -88,6 +91,9 @@ export function SessionScreen({ session, onExit }: { session: Session; onExit: (
               running={false}
               mirrored={step.side === 'droit'}
               armsBehind={step.exercise.armsBehind}
+              singleArm={step.exercise.singleArm}
+              singleLeg={step.exercise.singleLeg}
+              ground={!step.exercise.noGround}
             />
           </div>
         )}

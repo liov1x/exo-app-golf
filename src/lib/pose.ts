@@ -40,12 +40,37 @@ export const BODY = {
   torso: 15,
   arm: 7.5,
   leg: 10.5,
-  /** Épaisseur du trait de contour, de chaque côté de la forme. */
-  outline: 2.2,
   headRadius: 8.5,
   /** Espace entre le haut du tronc et la tête : elle doit rester détachée. */
   headGap: 2.5,
+  /**
+   * Les membres du fond sont légèrement plus fins que ceux du premier plan.
+   * C'est le seul indice de profondeur qu'on s'autorise en plus du recouvrement,
+   * et il suffit à savoir quel bras est devant.
+   */
+  far: 0.86,
+  /** Valeur nominale du contour, pour le calcul du cadre uniquement. */
+  outline: 2.2,
 } as const
+
+/**
+ * Épaisseur du trait de contour, en PIXELS à l'écran.
+ *
+ * En unités du repère, elle varierait d'un exercice à l'autre : chaque schéma
+ * est cadré sur son propre mouvement, donc zoomé différemment, et un même
+ * chiffre donnerait un trait gras ici et fin là. Une planche de pictogrammes
+ * n'a qu'une seule graisse de trait — on la fixe donc en pixels et on la
+ * reconvertit en unités selon le zoom réel de chaque figure.
+ */
+export const OUTLINE_PX = 3
+
+/**
+ * Cadre minimal, en unités.
+ *
+ * Sans plancher, un exercice compact serait zoomé bien plus qu'un exercice
+ * étendu et son personnage paraîtrait deux fois plus épais que les autres.
+ */
+export const MIN_VIEW = { w: 125, h: 100 } as const
 
 /**
  * Position réelle de la tête.
@@ -114,7 +139,7 @@ export type View = { x: number; y: number; w: number; h: number; ground: boolean
  * englobante de TOUTES les poses clés — sur toutes les poses, pour que la
  * figure ne saute pas d'échelle pendant l'animation — et on cadre dessus.
  */
-export function poseView(frames: Pose[], pad = 6): View {
+export function poseView(frames: Pose[], withGround = true, pad = 6): View {
   let minX = Infinity
   let minY = Infinity
   let maxX = -Infinity
@@ -138,13 +163,24 @@ export function poseView(frames: Pose[], pad = 6): View {
     }
   }
   // Le sol ne fait partie du cadre que si le corps le touche vraiment.
-  const ground = maxY >= GROUND_Y - 4
+  const ground = withGround && maxY >= GROUND_Y - 4
   if (ground) maxY = Math.max(maxY, GROUND_Y)
-  return {
-    x: minX - pad,
-    y: minY - pad,
-    w: maxX - minX + pad * 2,
-    h: maxY - minY + pad * 2,
-    ground,
+
+  let x = minX - pad
+  let y = minY - pad
+  let w = maxX - minX + pad * 2
+  let h = maxY - minY + pad * 2
+
+  // Élargir autour du centre jusqu'au cadre minimal, pour que tous les
+  // personnages soient dessinés à des échelles comparables.
+  if (w < MIN_VIEW.w) {
+    x -= (MIN_VIEW.w - w) / 2
+    w = MIN_VIEW.w
   }
+  if (h < MIN_VIEW.h) {
+    y -= (MIN_VIEW.h - h) / 2
+    h = MIN_VIEW.h
+  }
+
+  return { x, y, w, h, ground }
 }

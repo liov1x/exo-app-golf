@@ -50,15 +50,56 @@ partir de la boîte englobante de toutes les poses clés, chair comprise : sans
 ### Le contour sans coutures
 
 Chaque groupe de membres est tracé deux fois : épais dans la couleur du
-contour, puis un peu plus fin dans la couleur du fond. La seconde passe efface
-les contours internes du groupe et il ne reste que la silhouette. Les membres
-arrière forment un groupe à part, dessiné en premier, donc le contour du corps
-passe devant eux — c'est ce qui sépare les deux jambes. `armsBehind` fait
-passer le bras avant dans ce groupe arrière, pour les poses où la main revient
-toucher le corps.
+contour, puis exactement une épaisseur de contour plus fin dans la couleur du
+fond. La seconde passe efface les contours internes du groupe et il ne reste
+que la silhouette.
 
 La couleur du fond est lue dans `--figure-paper` : elle doit correspondre au
 fond réel derrière la figure, sinon l'intérieur du personnage jure.
+
+### Une seule graisse de trait
+
+L'épaisseur du contour est fixée en **pixels** (`OUTLINE_PX`), pas en unités du
+repère. Chaque schéma étant cadré sur son propre mouvement, donc zoomé
+différemment, une épaisseur en unités donnerait un trait gras ici et fin là.
+`Figure` mesure son zoom réel à l'écran et reconvertit. `MIN_VIEW` borne en
+plus le cadrage, pour que les personnages restent à des échelles comparables.
+
+Même règle pour la tête : son cercle est tracé avec une épaisseur simple,
+puisque le trait y est centré sur le chemin. Une épaisseur double y donnait un
+contour deux fois plus gras que celui du corps.
+
+### Premier plan, second plan
+
+Les membres du fond forment un groupe dessiné en premier : le contour du corps
+passe devant eux, et ils sont un peu plus fins (`BODY.far`). On sait donc quel
+bras est devant.
+
+Trois réglages par exercice, dans cet ordre de fréquence :
+
+- `singleArm` / `singleLeg` — de profil, un mouvement symétrique superpose
+  exactement les deux bras ou les deux jambes. Le membre du fond ne sort alors
+  qu'en liseré collé à l'autre, et ça se lit comme un défaut de tracé : on n'en
+  dessine qu'un. À laisser faux dès que les deux membres font des choses
+  différentes (le genou qui monte en planche, la fente).
+- `armsBehind` — quand la main revient toucher le corps, un bras dessiné devant
+  fusionne avec le tronc en un pâté. Derrière, le contour du tronc le recoupe.
+- `noGround` — coupe le trait de sol, qui n'a pas de sens hors des vues
+  orthogonales.
+
+### Quand passer en trois quarts
+
+Le modèle accepte n'importe quelle projection : une vue de trois quarts n'est
+qu'un autre placement des articulations, avec `noGround`.
+
+Essayé sur les genoux à la poitrine et sur le quatre-pattes : dans les deux cas
+c'était moins lisible que le profil, le corps devenant une masse sans axe
+clair. Ces deux schémas ont été refaits de profil.
+
+Le trois quarts se justifie quand le profil cache le mouvement lui-même —
+typiquement les rotations, où tout se passe dans la profondeur : la rotation
+lombaire genoux au sol (n° 6) ou l'ouverture du bras à quatre pattes (n° 13).
+Pas avant.
 
 ### Le son porte l'information
 
