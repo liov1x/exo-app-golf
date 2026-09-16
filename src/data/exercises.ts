@@ -26,6 +26,8 @@ export type Exercise = {
    */
   singleArm?: boolean
   singleLeg?: boolean
+  /** Détache la jambe avant du corps, quand elle repasse par-dessus le tronc. */
+  legInFront?: boolean
   /** Coupe le trait de sol, sur les vues où il n'a pas de sens. */
   noGround?: boolean
   /** Photo d'origine découpée de la planche PDF. */
@@ -76,35 +78,36 @@ export const EXERCISES: Exercise[] = [
   },
   {
     id: 4,
-    name: 'Genoux à la poitrine',
-    cue: 'Ramène les deux genoux, entoure-les des bras, berce doucement.',
+    name: 'Bassin enroulé, genoux aux épaules',
+    cue: 'Dos au sol : enroule le bassin vers le haut, amène les genoux au niveau des épaules.',
     category: 'sol',
     duration: 40,
     bilateral: false,
     cycle: 5,
     photo: 'photos/exo-04.jpg',
-    armsBehind: true,
     singleArm: true,
     singleLeg: true,
-    // La cuisse monte franchement vers la poitrine et le tibia redescend bien
-    // à l'écart : sans cet angle, cuisse et tibia se superposent en un moignon
-    // et le bras vient refermer le tout en pâté.
+    legInFront: true,
+    // Les épaules restent au sol, le bassin monte : c'est la colonne qui
+    // s'enroule vertèbre par vertèbre, d'où une courbure très marquée en fin
+    // de mouvement. Les bras restent à plat le long du corps — sur la photo
+    // ils vont chercher les pieds, mais ils passeraient alors dans la tête.
     frames: [
       {
         bend: -3,
-        head: [44, 118], neck: [56, 118], hip: [106, 118],
-        elbowA: [66, 106], handA: [78, 98],
-        elbowB: [66, 108], handB: [78, 100],
-        kneeA: [88, 94], footA: [106, 112],
-        kneeB: [88, 94], footB: [106, 112],
+        head: [40, 118], neck: [58, 118], hip: [104, 116],
+        elbowA: [78, 122], handA: [96, 125],
+        elbowB: [78, 122], handB: [96, 125],
+        kneeA: [98, 84], footA: [78, 92],
+        kneeB: [98, 84], footB: [78, 92],
       },
       {
-        bend: -8,
-        head: [44, 118], neck: [56, 118], hip: [102, 118],
-        elbowA: [60, 100], handA: [70, 90],
-        elbowB: [60, 102], handB: [70, 92],
-        kneeA: [78, 82], footA: [96, 104],
-        kneeB: [78, 82], footB: [96, 104],
+        bend: -14,
+        head: [40, 118], neck: [58, 118], hip: [84, 78],
+        elbowA: [78, 122], handA: [96, 125],
+        elbowB: [78, 122], handB: [96, 125],
+        kneeA: [62, 96], footA: [50, 108],
+        kneeB: [62, 96], footB: [50, 108],
       },
     ],
   },

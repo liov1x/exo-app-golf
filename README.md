@@ -109,6 +109,10 @@ Trois réglages par exercice, dans cet ordre de fréquence :
   différentes (le genou qui monte en planche, la fente).
 - `armsBehind` — quand la main revient toucher le corps, un bras dessiné devant
   fusionne avec le tronc en un pâté. Derrière, le contour du tronc le recoupe.
+- `legInFront` — une cuisse qui repasse au-dessus du tronc, bassin enroulé,
+  fusionne avec lui puisque les contours internes d'un même groupe s'effacent.
+  Dessinée à part par-dessus, elle garde son contour. En échange, une couture
+  apparaît à la hanche : à ne mettre que quand la jambe croise vraiment le corps.
 - `noGround` — coupe le trait de sol, qui n'a pas de sens hors des vues
   orthogonales.
 
@@ -134,7 +138,12 @@ et le prochain exercice est annoncé à voix haute pendant la transition.
 
 ## Reste à faire
 
-- Dessiner les 23 exercices manquants (nommer, écrire la consigne, poser les poses clés)
+- **Faire valider le nom et la consigne des 23 exercices manquants avant de les
+  dessiner.** La planche ne porte aucun texte : tout est déduit des photos, et
+  l'exercice 4 a d'abord été dessiné comme un simple genou replié au sol alors
+  qu'il s'agit d'un bassin enroulé en l'air, genoux aux épaules. Une pose fausse
+  est plus coûteuse à corriger qu'une intention confirmée d'avance.
+- Dessiner les 23 exercices manquants (poses clés, courbure du dos, plans)
 - Éditeur de séances : composer, régler les durées, réordonner
 - Historique local des séances
 - Publication sur GitHub Pages

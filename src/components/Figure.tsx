@@ -39,6 +39,16 @@ type Props = {
    */
   singleArm?: boolean
   singleLeg?: boolean
+  /**
+   * Détache la jambe avant du corps, dessinée par-dessus.
+   *
+   * Dans un même groupe, les contours internes s'effacent : une cuisse qui
+   * repasse au-dessus du tronc — bassin enroulé, genou ramené haut — fusionne
+   * alors avec lui en une seule masse. Dessinée à part, elle garde son
+   * contour et on voit qu'elle passe devant. En échange, une couture apparaît
+   * à la hanche : à ne mettre que quand la jambe croise vraiment le corps.
+   */
+  legInFront?: boolean
 }
 
 type Segment = { d: string; w: number }
@@ -90,6 +100,7 @@ export function Figure({
   ground = true,
   singleArm,
   singleLeg,
+  legInFront,
 }: Props) {
   const [pose, setPose] = useState<Pose>(frames[0])
   const elapsed = useRef(0)
@@ -158,9 +169,10 @@ export function Figure({
       : [{ d: limb([pose.hip, pose.kneeB, pose.footB]), w: BODY.leg * BODY.far }]),
     ...(armsBehind ? [nearArm] : []),
   ]
+  const nearLeg: Segment = { d: limb([pose.hip, pose.kneeA, pose.footA]), w: BODY.leg }
   const front: Segment[] = [
     { d: spine(pose), w: BODY.torso },
-    { d: limb([pose.hip, pose.kneeA, pose.footA]), w: BODY.leg },
+    ...(legInFront ? [] : [nearLeg]),
     ...(armsBehind ? [] : [nearArm]),
   ]
 
@@ -179,6 +191,7 @@ export function Figure({
 
       <Part segments={behind} outline={outline} />
       <Part segments={front} outline={outline} />
+      {legInFront && <Part segments={[nearLeg]} outline={outline} />}
 
       <circle className="head" cx={head[0]} cy={head[1]} r={BODY.headRadius} strokeWidth={outline} />
     </svg>

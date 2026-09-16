@@ -80,6 +80,7 @@ export function SessionScreen({ session, onExit }: { session: Session; onExit: (
             armsBehind={step.exercise.armsBehind}
             singleArm={step.exercise.singleArm}
             singleLeg={step.exercise.singleLeg}
+            legInFront={step.exercise.legInFront}
             ground={!step.exercise.noGround}
           />
         ) : (
@@ -93,6 +94,7 @@ export function SessionScreen({ session, onExit }: { session: Session; onExit: (
               armsBehind={step.exercise.armsBehind}
               singleArm={step.exercise.singleArm}
               singleLeg={step.exercise.singleLeg}
+              legInFront={step.exercise.legInFront}
               ground={!step.exercise.noGround}
             />
           </div>

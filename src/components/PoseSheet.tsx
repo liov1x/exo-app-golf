@@ -26,6 +26,7 @@ export function PoseSheet() {
                 armsBehind={e.armsBehind}
                 singleArm={e.singleArm}
                 singleLeg={e.singleLeg}
+                legInFront={e.legInFront}
                 ground={!e.noGround}
               />
               <span>animé</span>
@@ -39,6 +40,7 @@ export function PoseSheet() {
                   armsBehind={e.armsBehind}
                   singleArm={e.singleArm}
                   singleLeg={e.singleLeg}
+                  legInFront={e.legInFront}
                   ground={!e.noGround}
                 />
                 <span>pose {i + 1}</span>
